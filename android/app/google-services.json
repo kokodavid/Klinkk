@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "619261701752",
+    "project_id": "klinkk-58380",
+    "storage_bucket": "klinkk-58380.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619261701752:android:c0d7ea1d302b2c0eab078d",
+        "android_client_info": {
+          "package_name": "com.koko.klinkk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619261701752-v6i1neu1cgsl78a4ukt8l0mojiqja88h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf14EZQWHNs-Xa9VSUus_QUQ6zoWpSS6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619261701752-v6i1neu1cgsl78a4ukt8l0mojiqja88h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
