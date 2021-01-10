@@ -4,6 +4,10 @@ import 'package:klinkk/views/chatRoomScreen.dart';
 import 'package:klinkk/widgets/widget.dart';
 
 class SignUp extends StatefulWidget {
+
+  final Function toggle;
+  SignUp(this.toggle);
+
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -146,12 +150,20 @@ class _SignUpState extends State<SignUp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Already have an Account ?",style: mediumTextStyle(),),
-                    Text("Sign In now",style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        decoration: TextDecoration.underline
+                    GestureDetector(
+                      onTap: (){
+                        widget.toggle();
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        child: Text("Sign In now",style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            decoration: TextDecoration.underline
+                        )
+                          ,),
+                      ),
                     )
-                      ,)
                   ],
                 ),
                 SizedBox(height: 50,),
