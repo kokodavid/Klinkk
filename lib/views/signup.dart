@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:klinkk/services/auth.dart';
+import 'package:klinkk/services/database.dart';
 import 'package:klinkk/views/chatRoomScreen.dart';
 import 'package:klinkk/widgets/widget.dart';
 
@@ -18,6 +19,8 @@ class _SignUpState extends State<SignUp> {
 
   AuthMethods authMethods = new AuthMethods();
 
+  DatabaseMethods databaseMethods = new DatabaseMethods();
+
   final formKey = GlobalKey<FormState>();
 
   TextEditingController userNameTextEditingController = new TextEditingController();
@@ -34,6 +37,12 @@ class _SignUpState extends State<SignUp> {
       authMethods.signUpWithEmailAndPassword
         (emailTextEditingController.text, passWordTextEditingController.text).then((val){
           print("$val");
+
+          Map<String, String> userInfoMap = {
+            "name" : userNameTextEditingController.text,
+            "email": emailTextEditingController.text
+          };
+      databaseMethods.uploadUserInfo(userInfoMap);
 
           Navigator.pushReplacement(context, MaterialPageRoute(
             builder: (context) => ChatRoom()
