@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:klinkk/helper/helperfunctions.dart';
 import 'package:klinkk/services/auth.dart';
+import 'package:klinkk/services/database.dart';
 import 'package:klinkk/widgets/widget.dart';
 
 import 'chatRoomScreen.dart';
@@ -17,7 +20,9 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
 
   bool isLoading = false;
+  QuerySnapshot querySnapshotUserInfo;
   AuthMethods authMethods = AuthMethods();
+  DatabaseMethods databaseMethods  = new DatabaseMethods();
 
   final formKey = GlobalKey<FormState>();
 
@@ -26,6 +31,16 @@ class _SignInState extends State<SignIn> {
 
   login(){
     if(formKey.currentState.validate()) {
+
+      HelperFunctions.saveUserEmailInSharedPreference(emailTextEditingController.text);
+      // HelperFunctions.saveUserEmailInSharedPreference(userNameTextEditingController.text);
+
+      databaseMethods.getUserByUserEmail(emailTextEditingController.text)
+          .then((val){
+        querySnapshotUserInfo = val;
+        HelperFunctions.saveUserNameInSharedPreference(querySnapshotUserInfo.docs[0].data()["name"]);
+      });
+
       setState(() {
         isLoading = true;
       });
@@ -33,11 +48,16 @@ class _SignInState extends State<SignIn> {
       authMethods.signInWithEmailAndPassword
         (emailTextEditingController.text, passWordTextEditingController.text)
           .then((val) {
-        print("$val");
+            if(val != null){
+              HelperFunctions.saveUserLoggedInSharedPreference(true);
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => ChatRoom()
+              ));
+              print("$val");
+            }
 
-        Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => ChatRoom()
-        ));
+
+
       });
     }
   }
