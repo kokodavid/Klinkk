@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:klinkk/helper/helperfunctions.dart';
 import 'package:klinkk/services/auth.dart';
+import 'package:klinkk/services/database.dart';
 import 'package:klinkk/views/chatRoomScreen.dart';
 import 'package:klinkk/widgets/widget.dart';
 
@@ -18,6 +20,9 @@ class _SignUpState extends State<SignUp> {
 
   AuthMethods authMethods = new AuthMethods();
 
+  DatabaseMethods databaseMethods = new DatabaseMethods();
+  HelperFunctions helperFunctions = new HelperFunctions();
+
   final formKey = GlobalKey<FormState>();
 
   TextEditingController userNameTextEditingController = new TextEditingController();
@@ -26,6 +31,15 @@ class _SignUpState extends State<SignUp> {
 
   signMeUp(){
     if(formKey.currentState.validate()){
+
+      Map<String, String> userInfoMap = {
+        "name" : userNameTextEditingController.text,
+        "email": emailTextEditingController.text
+      };
+
+      HelperFunctions.saveUserEmailInSharedPreference(emailTextEditingController.text);
+      HelperFunctions.saveUserNameInSharedPreference(userNameTextEditingController.text);
+
       setState(() {
         isLoading = true;
 
@@ -35,6 +49,10 @@ class _SignUpState extends State<SignUp> {
         (emailTextEditingController.text, passWordTextEditingController.text).then((val){
           print("$val");
 
+
+
+        databaseMethods.uploadUserInfo(userInfoMap);
+        HelperFunctions.saveUserLoggedInSharedPreference(true);
           Navigator.pushReplacement(context, MaterialPageRoute(
             builder: (context) => ChatRoom()
           ));
