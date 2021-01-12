@@ -14,13 +14,11 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-  
-  
+
   // This widget is the root of your application.
   @override
   _MyAppState createState() => _MyAppState();
 }
-
 
 class _MyAppState extends State<MyApp> {
 
@@ -43,15 +41,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Klinkk',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color(0xff145C9E),
         scaffoldBackgroundColor: Color(0xff1F1F1F),
         primarySwatch: Colors.blue,
       ),
-      home: userLoggedIn ? ChatRoom() :
-      Authenticate()
+      home: userLoggedIn ? ChatRoom() : Authenticate() ,
     );
   }
 }

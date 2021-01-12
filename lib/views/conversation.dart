@@ -11,6 +11,13 @@ class _ConversationScreenState extends State<ConversationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarMain(context),
+      body: Container(
+        child: Stack(
+          children: [
+
+          ],
+        ),
+      ),
     );
   }
 }
