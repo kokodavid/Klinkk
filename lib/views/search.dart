@@ -61,7 +61,7 @@ class _SearchState extends State<Search> {
       };
       DatabaseMethods().createChatRoom(chatRoomId, chatRoomMap);
       Navigator.push(context, MaterialPageRoute(
-          builder: (context) => ConversationScreen()
+          builder: (context) => ConversationScreen(chatRoomId)
       ));
     // }else{
     //   print ("You Can't talk to your self mad man");
